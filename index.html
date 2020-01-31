@@ -7,72 +7,77 @@
     <title>JS Bin</title>
 </head>
 <style>
-    #input {
+    #inputID {
         width: 100%;
+        display: block;
         padding: 10px;
         margin-bottom: 10px;
+        box-sizing: border-box;
     }
 </style>
 
 <body>
 
-    <input type="text" id="input" value='"color : #fff; background-color : #fff;"' />
+    <input type="text" id="inputID" />
     <button onclick="submit();">Convert</button>
     <p>Result : </p>
     <p id="result"></p>
     <script>
-        var str = document.getElementById("input").value;
-        console.log(str);
-        var len = str.length - 1;
-        str = str.replace(/\s/g, ''); //remove space
-        str = str.replace(/"/g, ''); // remove "
-        let origString = str.split('');
-        origString.splice(0, 0, "{{"); // add {{
-        origString.push("}}"); // add }}
-        str = origString.join('');
-        str = str.replace(/:/g, ':"'); // adding values in quotes "
-        str = str.replace(/;/g, '",'); // adding values in quotes "
-        str = str.replace(/,}}/, '}}');
-
-        str = str.replace(/background-color/, "backgroundColor");
-        str = str.replace(/background-image/, "backgroundImage");
-
-        str = str.replace(/text-align/, "textAlign");
-        str = str.replace(/text-decoration/, "textDecoration");
-
-        str = str.replace(/border-collapse/, "borderCollapse");
-        str = str.replace(/border-color/, "borderColor");
-        str = str.replace(/border-radius/, "borderRadius");
-        str = str.replace(/border-bottom/, "borderBottom");
-        str = str.replace(/border-top/, "borderTop");
-        str = str.replace(/border-left/, "borderLeft");
-        str = str.replace(/border-right/, "borderRight");
-
-        str = str.replace(/vertical-align/, "verticalAlign");
-
-        str = str.replace(/font-size/, "fontSize");
-
-        str = str.replace(/line-height/, "lineHeight");
-
-        str = str.replace(/box-shadow/, "boxShadow");
-
-        str = str.replace(/font-family/, "fontFamily");
-        str = str.replace(/font-weight/, "fontWeight");
-
-        str = str.replace(/list-style/, "listStyle");
-        str = str.replace(/letter-spacing/, "letterSpacing");
-
-        str = str.replace(/margin-bottom/, "marginBottom");
-        str = str.replace(/margin-top/, "marginTop");
-        str = str.replace(/margin-left/, "marginLeft");
-        str = str.replace(/margin-right/, "marginRight");
-
-        str = str.replace(/padding-bottom/, "paddingBottom");
-        str = str.replace(/padding-top/, "paddingTop");
-        str = str.replace(/padding-left/, "paddingLeft");
-        str = str.replace(/padding-right/, "paddingRight");
-
         function submit() {
+            var str1 = document.getElementById("inputID");
+            str = str1.value;
+            var len = str.length - 1;
+            str = str.replace(/"/g, ''); // remove "
+            str = str.replace(/!important/, '');
+            let origString = str.split('');
+            origString.splice(0, 0, "{{"); // add {{
+            origString.push("}}"); // add }}
+            str = origString.join('');
+            str = str.replace(/:/g, ':"'); // adding values in quotes "
+            str = str.replace(/;/g, '",'); // adding values in quotes "
+            if (str.match(/,}}/g)) {
+                str = str.replace(/,}}/, '}}');
+            }
+            else {
+                str = str.replace(/}}/, '"}}');
+            }
+            str = str.replace(/background-color/, "backgroundColor");
+            str = str.replace(/background-image/, "backgroundImage");
+
+            str = str.replace(/text-align/, "textAlign");
+            str = str.replace(/text-decoration/, "textDecoration");
+
+            str = str.replace(/border-collapse/, "borderCollapse");
+            str = str.replace(/border-color/, "borderColor");
+            str = str.replace(/border-radius/, "borderRadius");
+            str = str.replace(/border-bottom/, "borderBottom");
+            str = str.replace(/border-top/, "borderTop");
+            str = str.replace(/border-left/, "borderLeft");
+            str = str.replace(/border-right/, "borderRight");
+
+            str = str.replace(/vertical-align/, "verticalAlign");
+
+            str = str.replace(/font-size/, "fontSize");
+
+            str = str.replace(/line-height/, "lineHeight");
+
+            str = str.replace(/box-shadow/, "boxShadow");
+
+            str = str.replace(/font-family/, "fontFamily");
+            str = str.replace(/font-weight/, "fontWeight");
+
+            str = str.replace(/list-style/, "listStyle");
+            str = str.replace(/letter-spacing/, "letterSpacing");
+
+            str = str.replace(/margin-bottom/, "marginBottom");
+            str = str.replace(/margin-top/, "marginTop");
+            str = str.replace(/margin-left/, "marginLeft");
+            str = str.replace(/margin-right/, "marginRight");
+
+            str = str.replace(/padding-bottom/, "paddingBottom");
+            str = str.replace(/padding-top/, "paddingTop");
+            str = str.replace(/padding-left/, "paddingLeft");
+            str = str.replace(/padding-right/, "paddingRight");
             res = document.getElementById("result");
             res.innerHTML = str;
         }
